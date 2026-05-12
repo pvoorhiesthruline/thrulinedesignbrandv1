@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thruline Design · Brand Pack v1.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #FAFAF7; color: #0B1220; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- ============================================================
+       BRAND COMPONENTS (brand-components.jsx)
+       ============================================================ -->
+  <script type="text/babel">
+const C = {
+  forestTeal:  '#0E6B5E',
+  neoMint:     '#10B981',
+  aquaFoam:    '#6EE7C7',
+  navy:        '#1B1F4B',
+  cobalt:      '#2D5BE3',
+  sky:         '#5B9BF0',
+  veriPeri:    '#6B4FD8',
+  periwinkle:  '#A78BFA',
+  blueIris:    '#3D4EBF',
+  ink:         '#0B1220',
+  inkDeep:     '#06091A',
+  paper:       '#FAFAF7',
+  paperWarm:   '#F3F1EA',
+  paperDark:   '#0E1530',
+  rule:        'rgba(11,18,32,0.08)',
+  ruleDark:    'rgba(255,255,255,0.10)',
+};
+window.C = C;
+
+const ThrulineMark = ({ size = 56, primary = C.veriPeri, accent = C.periwinkle, title = 'Thruline Design Mark' }) => {
+  const barY=22,barH=8.74,arcLift=4.18,startX=10.27,endX=89.03,midX=(startX+endX)/2;
+  const stemX=75.65,stemW=10.26,dotR=8.74;
+  const t=(stemX-startX)/(endX-startX);
+  const yAtStem=barY-4*arcLift*t*(1-t);
+  const stemTop=yAtStem-barH/2;
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" role="img" aria-label={title} style={{display:'block'}}>
+      <path d={`M ${startX} ${barY} Q ${midX} ${barY-2*arcLift}, ${endX} ${barY}`} stroke={primary} strokeWidth={barH} strokeLinecap="round" fill="none"/>
+      <rect x={stemX-stemW/2} y={stemTop} width={stemW} height={90-stemTop} rx={stemW/2} fill={primary}/>
+      <circle cx={startX} cy={barY} r={dotR} fill={accent}/>
+    </svg>
+  );
+};
+window.ThrulineMark = ThrulineMark;
+
+const ThrulineFavicon = ({ size = 32, primary = C.veriPeri, accent = C.periwinkle }) => {
+  const startX=3.3,endX=28.5,midX=(startX+endX)/2,barY=8,arcLift=1.34,barH=2.8,stemX=24.2,stemW=3.3,dotR=2.8;
+  const t=(stemX-startX)/(endX-startX);
+  const yAtStem=barY-4*arcLift*t*(1-t);
+  const stemTop=yAtStem-barH/2;
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{display:'block'}}>
+      <path d={`M ${startX} ${barY} Q ${midX} ${barY-2*arcLift}, ${endX} ${barY}`} stroke={primary} strokeWidth={barH} strokeLinecap="round" fill="none"/>
+      <rect x={stemX-stemW/2} y={stemTop} width={stemW} height={29-stemTop} rx={stemW/2} fill={primary}/>
+      <circle cx={startX} cy={barY} r={dotR} fill={accent}/>
+    </svg>
+  );
+};
+window.ThrulineFavicon = ThrulineFavicon;
+
+const ThrulineLockup = ({ size=48, color=C.ink, subColor, primary=C.veriPeri, accent=C.periwinkle }) => {
+  const fs=size;
+  const subAlpha=subColor?1:0.7;
+  const subFill=subColor||color;
+  const dotR=fs*0.115,barH=fs*0.115,stemW=fs*0.135,stemH=fs*0.78,arcLift=fs*0.055;
+  const topPad=dotR+arcLift+fs*0.02;
+  const barY=topPad,dotCx=dotR+fs*0.02,stemX=dotCx+fs*1.0,barEndExt=fs*0.18,barEndX=stemX+barEndExt;
+  const barMidX=(dotCx+barEndX)/2;
+  const tStem=(stemX-dotCx)/(barEndX-dotCx);
+  const yAtStem=barY-4*arcLift*tStem*(1-tStem);
+  const svgW=barEndX+barH,svgH=barY+stemH+barH/2;
+  return (
+    <div style={{display:'inline-flex',alignItems:'flex-start',fontFamily:'"Inter Tight",system-ui,sans-serif',lineHeight:1}}>
+      <svg width={svgW} height={svgH} viewBox={`0 0 ${svgW} ${svgH}`} style={{display:'block',flex:'0 0 auto',overflow:'visible'}}>
+        <path d={`M ${dotCx} ${barY} Q ${barMidX} ${barY-2*arcLift}, ${barEndX} ${barY}`} stroke={primary} strokeWidth={barH} strokeLinecap="round" fill="none"/>
+        <rect x={stemX-stemW/2} y={yAtStem-barH/2} width={stemW} height={stemH+barH/2} rx={stemW/2} fill={primary}/>
+        <circle cx={dotCx} cy={barY} r={dotR} fill={accent}/>
+      </svg>
+      <span style={{fontSize:fs,fontWeight:600,letterSpacing:'-0.025em',color,marginLeft:-fs*0.08,marginTop:yAtStem-fs*0.215,whiteSpace:'nowrap'}}>
+        hruline<span style={{fontWeight:300,color:subFill,opacity:subAlpha,marginLeft:'0.30em'}}>Design</span>
+      </span>
+    </div>
+  );
+};
+window.ThrulineLockup = ThrulineLockup;
+
+const ThrulineStacked = ({ size=48, color=C.ink, subColor, primary=C.veriPeri, accent=C.periwinkle }) => {
+  const fs=size,subAlpha=subColor?1:0.7,subFill=subColor||color,lineGap=fs*0.12;
+  const dotR=fs*0.115,barH=fs*0.115,stemW=fs*0.135,stemH=fs*0.78,arcLift=fs*0.055;
+  const topPad=dotR+arcLift+fs*0.02;
+  const barY=topPad,dotCx=dotR+fs*0.02,stemX=dotCx+fs*1.0,barEndExt=fs*0.18,barEndX=stemX+barEndExt;
+  const barMidX=(dotCx+barEndX)/2;
+  const tStem=(stemX-dotCx)/(barEndX-dotCx);
+  const yAtStem=barY-4*arcLift*tStem*(1-tStem);
+  const svgW=barEndX+barH,svgH=barY+stemH+barH/2;
+  return (
+    <div style={{display:'inline-flex',alignItems:'flex-start',fontFamily:'"Inter Tight",system-ui,sans-serif',lineHeight:1}}>
+      <svg width={svgW} height={svgH} viewBox={`0 0 ${svgW} ${svgH}`} style={{display:'block',flex:'0 0 auto',overflow:'visible'}}>
+        <path d={`M ${dotCx} ${barY} Q ${barMidX} ${barY-2*arcLift}, ${barEndX} ${barY}`} stroke={primary} strokeWidth={barH} strokeLinecap="round" fill="none"/>
+        <rect x={stemX-stemW/2} y={yAtStem-barH/2} width={stemW} height={stemH+barH/2} rx={stemW/2} fill={primary}/>
+        <circle cx={dotCx} cy={barY} r={dotR} fill={accent}/>
+      </svg>
+      <div style={{marginLeft:-fs*0.08,marginTop:yAtStem-fs*0.215,display:'flex',flexDirection:'column',gap:lineGap}}>
+        <span style={{fontSize:fs,fontWeight:600,letterSpacing:'-0.025em',color,lineHeight:1,whiteSpace:'nowrap'}}>hruline</span>
+        <span style={{fontSize:fs,fontWeight:300,letterSpacing:'-0.025em',color:subFill,opacity:subAlpha,lineHeight:1,whiteSpace:'nowrap'}}>Design</span>
+      </div>
+    </div>
+  );
+};
+window.ThrulineStacked = ThrulineStacked;
+
+const ThrulineWordmark = ({ size=48, color=C.ink, subColor }) => {
+  const subFill=subColor||color,subAlpha=subColor?1:0.7;
+  return (
+    <span style={{fontFamily:'"Inter Tight",system-ui,sans-serif',fontSize:size,fontWeight:600,letterSpacing:'-0.025em',color,lineHeight:1,whiteSpace:'nowrap'}}>
+      Thruline<span style={{fontWeight:300,color:subFill,opacity:subAlpha,marginLeft:'0.30em'}}>Design</span>
+    </span>
+  );
+};
+window.ThrulineWordmark = ThrulineWordmark;
+
+const LogoFrame = ({ children, dark=false, label, code, style={} }) => (
+  <div style={{background:dark?C.paperDark:C.paper,borderRadius:6,border:dark?`1px solid ${C.ruleDark}`:`1px solid ${C.rule}`,padding:'40px 32px 28px',display:'flex',flexDirection:'column',justifyContent:'space-between',minHeight:200,...style}}>
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center',flex:1,padding:'12px 0 24px'}}>{children}</div>
+    <div style={{display:'flex',alignItems:'baseline',justifyContent:'space-between',paddingTop:14,borderTop:dark?`1px solid ${C.ruleDark}`:`1px solid ${C.rule}`}}>
+      <span style={{fontFamily:'"Inter",system-ui,sans-serif',fontSize:13,fontWeight:500,color:dark?'#E5E7EB':C.ink,letterSpacing:'-0.01em'}}>{label}</span>
+      <span style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.10em',textTransform:'uppercase',color:dark?'#7C86A8':'#6B7280'}}>{code}</span>
+    </div>
+  </div>
+);
+window.LogoFrame = LogoFrame;
+
+const SectionHead = ({ num, kicker, title, intro }) => (
+  <div style={{marginBottom:56}}>
+    <div style={{display:'flex',alignItems:'baseline',gap:18,marginBottom:18}}>
+      <span style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.16em',textTransform:'uppercase',color:C.veriPeri,fontWeight:500}}>{num} · {kicker}</span>
+      <div style={{flex:1,height:1,background:C.rule}}/>
+    </div>
+    <h2 style={{fontFamily:'"Inter Tight",system-ui,sans-serif',fontSize:56,fontWeight:600,letterSpacing:'-0.028em',color:C.ink,margin:0,lineHeight:1.02,maxWidth:900,textWrap:'pretty'}}>{title}</h2>
+    {intro&&<p style={{fontFamily:'"Inter",system-ui,sans-serif',fontSize:17,fontWeight:400,lineHeight:1.55,color:'rgba(11,18,32,0.65)',marginTop:22,maxWidth:680,textWrap:'pretty'}}>{intro}</p>}
+  </div>
+);
+window.SectionHead = SectionHead;
+  </script>
+
+  <!-- ============================================================
+       PAGE SECTIONS 1–6 + APP
+       ============================================================ -->
+  <script type="text/babel">
+/* global React, C, ThrulineMark, ThrulineFavicon, ThrulineLockup, ThrulineStacked, ThrulineWordmark, LogoFrame, SectionHead */
+
+// ---- COVER ----
+const Cover = () => (
+  <section style={{background:C.paperWarm,padding:'120px 96px 96px',borderBottom:`1px solid ${C.rule}`,position:'relative',overflow:'hidden'}}>
+    <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none'}}>
+      <defs><pattern id="coverdots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill={C.veriPeri} opacity="0.10"/></pattern></defs>
+      <rect width="100%" height="100%" fill="url(#coverdots)"/>
+    </svg>
+    <div style={{position:'absolute',top:-200,right:-200,width:720,height:720,background:`radial-gradient(circle at center, ${C.periwinkle}55 0%, ${C.periwinkle}00 60%)`,pointerEvents:'none'}}/>
+    <div style={{position:'absolute',left:0,right:0,top:326,height:1,background:`linear-gradient(to right, ${C.veriPeri}00 0%, ${C.veriPeri}40 12%, ${C.veriPeri}40 88%, ${C.veriPeri}00 100%)`,pointerEvents:'none'}}/>
+    <div style={{position:'absolute',right:-64,bottom:-120,opacity:0.06,pointerEvents:'none'}}>
+      <ThrulineMark size={520} primary={C.veriPeri} accent={C.veriPeri}/>
+    </div>
+    <div style={{position:'relative',display:'flex',justifyContent:'space-between',fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.16em',textTransform:'uppercase',color:'rgba(11,18,32,0.5)',marginBottom:140}}>
+      <span>Thruline Design · Visual identity</span>
+      <span>Brand pack v1.0 · May 2026</span>
+    </div>
+    <div style={{position:'relative',marginBottom:96}}><ThrulineLockup size={132}/></div>
+    <div style={{position:'relative',display:'flex',gap:80,alignItems:'flex-start'}}>
+      <div style={{flex:'0 0 280px'}}>
+        <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.16em',textTransform:'uppercase',color:C.veriPeri,fontWeight:500,marginBottom:14}}>The meaning</div>
+        <div style={{fontFamily:'"Inter Tight",system-ui,sans-serif',fontSize:28,fontWeight:500,letterSpacing:'-0.02em',lineHeight:1.15,color:C.ink,textWrap:'pretty'}}>The connecting thread running through theory, implementation, and outcomes.</div>
+      </div>
+      <div style={{flex:1,maxWidth:620}}>
+        <p style={{fontFamily:'"Inter",system-ui,sans-serif',fontSize:17,fontWeight:400,lineHeight:1.6,color:'rgba(11,18,32,0.72)',margin:0,textWrap:'pretty'}}>
+          Thruline Design is an R&amp;D firm pairing AI agents and workshop practice with deep evaluation and change-management expertise. The identity is built around one idea — a throughline. A horizontal line carries through the T of the wordmark and extends past it, signaling continuity, intentional craft, and the firm's role as the connecting tissue between research and outcome.
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
+// ---- ANATOMY ----
+const Anatomy = () => {
+  const annot = () => ({fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)',fontWeight:500});
+  return (
+    <section style={{padding:'120px 96px',background:C.paper,borderBottom:`1px solid ${C.rule}`}}>
+      <SectionHead num="01" kicker="Anatomy" title="One continuous line, carrying through." intro="The mark is a custom T whose crossbar extends past the stem to the left, terminating in an accent dot. The line implies continuation — the throughline carries on past the frame."/>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:64,alignItems:'center'}}>
+        <div style={{background:C.paperWarm,borderRadius:8,padding:48,position:'relative',aspectRatio:'1 / 1',display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>
+          <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0.5}}>
+            <defs><pattern id="agrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(11,18,32,0.06)" strokeWidth="1"/></pattern></defs>
+            <rect width="100%" height="100%" fill="url(#agrid)"/>
+          </svg>
+          <svg viewBox="0 0 110 100" style={{position:'relative',width:'90%',height:'auto',overflow:'visible'}}>
+            <path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke={C.veriPeri} strokeWidth="8.74" strokeLinecap="round" fill="none"/>
+            <rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill={C.veriPeri}/>
+            <circle cx="10.27" cy="22" r="8.74" fill={C.periwinkle}/>
+            <line x1="49.65" y1="17.82" x2="49.65" y2="4" stroke={C.ink} strokeWidth="0.25" strokeDasharray="0.7 1"/>
+            <circle cx="49.65" cy="17.82" r="0.7" fill={C.ink}/>
+            <text x="49.65" y="2" fontFamily='"JetBrains Mono",monospace' fontSize="3" fontWeight="500" letterSpacing="0.4" textAnchor="middle" fill={C.ink}>BOWED CROSSBAR</text>
+            <line x1="80.78" y1="55" x2="105" y2="55" stroke={C.ink} strokeWidth="0.25" strokeDasharray="0.7 1"/>
+            <circle cx="80.78" cy="55" r="0.7" fill={C.ink}/>
+            <text x="106" y="56.1" fontFamily='"JetBrains Mono",monospace' fontSize="3" fontWeight="500" letterSpacing="0.4" fill={C.ink}>STEM</text>
+            <line x1="19" y1="27" x2="4" y2="44" stroke={C.ink} strokeWidth="0.25" strokeDasharray="0.7 1"/>
+            <circle cx="19" cy="27" r="0.7" fill={C.ink}/>
+            <text x="1" y="47" fontFamily='"JetBrains Mono",monospace' fontSize="3" fontWeight="500" letterSpacing="0.4" fill={C.ink}>TERMINUS · DOT</text>
+          </svg>
+        </div>
+        <div style={{display:'flex',flexDirection:'column',gap:36}}>
+          {[['CROSSBAR','A gentle bowed line — a quadratic curve that lifts ~5% of the cap height at the midpoint. Extends past the T stem on the right to imply continuity beyond the mark.'],['STEM','Hangs from the crossbar where the curve passes overhead. Same stroke weight as the bar; rounded ends.'],['TERMINUS',"Accent dot in Periwinkle Bloom at the bar's leading endpoint. The line emerges from inside the dot — the dot is the source."],['STROKE','Crossbar and stem share one weight. Corner radius = half stroke (fully rounded ends).']].map(([k,v])=>(
+            <div key={k} style={{display:'grid',gridTemplateColumns:'120px 1fr',gap:24,alignItems:'baseline'}}>
+              <span style={annot()}>{k}</span>
+              <span style={{fontFamily:'"Inter",system-ui,sans-serif',fontSize:16,lineHeight:1.5,color:C.ink,textWrap:'pretty'}}>{v}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ---- LOGO FAMILY ----
+const LogoFamily = () => {
+  const renderRow = (dark) => (
+    <div style={{display:'grid',gridTemplateColumns:'1.6fr 1fr 0.7fr',gap:16}}>
+      <LogoFrame dark={dark} label="Primary horizontal" code="A · Lockup" style={{gridRow:'span 2'}}>
+        <ThrulineLockup size={60} color={dark?C.paper:C.ink} primary={dark?C.periwinkle:C.veriPeri} accent={dark?C.veriPeri:C.periwinkle}/>
+      </LogoFrame>
+      <LogoFrame dark={dark} label="Stacked" code="B · Stacked">
+        <ThrulineStacked size={42} color={dark?C.paper:C.ink} primary={dark?C.periwinkle:C.veriPeri} accent={dark?C.veriPeri:C.periwinkle}/>
+      </LogoFrame>
+      <LogoFrame dark={dark} label="Mark" code="C · Symbol">
+        <ThrulineMark size={88} primary={dark?C.periwinkle:C.veriPeri} accent={dark?C.veriPeri:C.periwinkle}/>
+      </LogoFrame>
+      <LogoFrame dark={dark} label="Wordmark" code="D · Type">
+        <ThrulineWordmark size={40} color={dark?C.paper:C.ink}/>
+      </LogoFrame>
+      <LogoFrame dark={dark} label="Favicon" code="E · 32px">
+        <ThrulineFavicon size={56} primary={dark?C.periwinkle:C.veriPeri} accent={dark?C.veriPeri:C.periwinkle}/>
+      </LogoFrame>
+    </div>
+  );
+  return (
+    <section style={{padding:'120px 96px',background:C.paper,borderBottom:`1px solid ${C.rule}`}}>
+      <SectionHead num="02" kicker="Logo Family" title="Five lockups, one system." intro="Every variant comes from the same construction. Use the horizontal lockup as default; reach for stacked, mark, wordmark, or favicon only when the format demands it."/>
+      <div style={{display:'flex',flexDirection:'column',gap:16}}>
+        <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)',marginBottom:4,fontWeight:500}}>On light · Veri Peri + Periwinkle on Paper</div>
+        {renderRow(false)}
+        <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)',margin:'32px 0 4px',fontWeight:500}}>On dark · Periwinkle + Veri Peri on Deep Navy</div>
+        {renderRow(true)}
+      </div>
+    </section>
+  );
+};
+
+// ---- CLEAR SPACE ----
+const ClearSpace = () => {
+  const X=14,lockupSize=64;
+  return (
+    <section style={{padding:'120px 96px',background:C.paperWarm,borderBottom:`1px solid ${C.rule}`}}>
+      <SectionHead num="03" kicker="Clear space & sizing" title="Give the mark room to carry through." intro="Clear space is measured as X — one stem-width. Keep this margin on all sides, free of other graphic elements. Minimum sizes ensure the dot and stem stay legible."/>
+      <div style={{display:'grid',gridTemplateColumns:'1.4fr 1fr',gap:48}}>
+        <div style={{background:C.paper,borderRadius:8,padding:'64px 56px',position:'relative',border:`1px solid ${C.rule}`}}>
+          <div style={{border:`1px dashed ${C.veriPeri}`,padding:`${X*1.6}px ${X*2}px`,display:'inline-flex',position:'relative'}}>
+            <ThrulineLockup size={lockupSize}/>
+            <div style={{position:'absolute',top:-28,left:'50%',transform:'translateX(-50%)',fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:C.veriPeri,background:C.paper,padding:'0 8px'}}>1 X</div>
+            <div style={{position:'absolute',left:-34,top:'50%',transform:'translateY(-50%)',fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:C.veriPeri,background:C.paper,padding:'4px 0',writingMode:'vertical-rl'}}>1 X</div>
+          </div>
+          <div style={{marginTop:36,fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.12em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)'}}>X = stem width</div>
+        </div>
+        <div style={{background:C.paper,borderRadius:8,padding:'40px 40px',border:`1px solid ${C.rule}`,display:'flex',flexDirection:'column',gap:28}}>
+          <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.veriPeri,fontWeight:500}}>Minimum sizes</div>
+          {[{label:'Horizontal lockup',sub:'min. 140 px wide / 32 mm print',el:<ThrulineLockup size={20}/>},{label:'Stacked lockup',sub:'min. 120 px wide / 28 mm print',el:<ThrulineStacked size={18}/>},{label:'Mark',sub:'min. 24 px / 6 mm',el:<ThrulineMark size={36}/>},{label:'Favicon',sub:'min. 16 px (use simplified variant)',el:<ThrulineFavicon size={28}/>}].map((row,i)=>(
+            <div key={i} style={{display:'grid',gridTemplateColumns:'200px 1fr',gap:24,alignItems:'center',paddingBottom:i<3?24:0,borderBottom:i<3?`1px solid ${C.rule}`:'none'}}>
+              <div style={{display:'flex',justifyContent:'flex-start'}}>{row.el}</div>
+              <div>
+                <div style={{fontFamily:'"Inter",system-ui,sans-serif',fontSize:14,fontWeight:600,color:C.ink,letterSpacing:'-0.01em'}}>{row.label}</div>
+                <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.10em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)',marginTop:4}}>{row.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ---- COLORS ----
+const ColorChip = ({ name, hex, role }) => {
+  const r=parseInt(hex.slice(1,3),16)/255,g=parseInt(hex.slice(3,5),16)/255,b=parseInt(hex.slice(5,7),16)/255;
+  const lum=0.299*r+0.587*g+0.114*b;
+  const labelColor=lum>0.55?'rgba(11,18,32,0.78)':'rgba(250,250,247,0.88)';
+  const subColor=lum>0.55?'rgba(11,18,32,0.55)':'rgba(250,250,247,0.62)';
+  const rgb=`${Math.round(r*255)} ${Math.round(g*255)} ${Math.round(b*255)}`;
+  return (
+    <div style={{background:hex,borderRadius:6,padding:'22px 20px',minHeight:168,display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
+      <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:subColor,fontWeight:500}}>{role}</div>
+      <div>
+        <div style={{fontFamily:'"Inter Tight",system-ui,sans-serif',fontSize:19,fontWeight:600,letterSpacing:'-0.015em',color:labelColor,marginBottom:8}}>{name}</div>
+        <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.10em',color:subColor,lineHeight:1.55}}>{hex.toUpperCase()}<br/>rgb({rgb})</div>
+      </div>
+    </div>
+  );
+};
+const ColorGroup = ({ title, sub, chips }) => (
+  <div>
+    <div style={{display:'flex',alignItems:'baseline',gap:12,marginBottom:14}}>
+      <span style={{fontFamily:'"Inter Tight",system-ui,sans-serif',fontSize:18,fontWeight:600,letterSpacing:'-0.015em',color:C.ink}}>{title}</span>
+      <span style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.5)'}}>{sub}</span>
+    </div>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:12}}>
+      {chips.map((c)=><ColorChip key={c.hex} {...c}/>)}
+    </div>
+  </div>
+);
+const Colors = () => (
+  <section style={{padding:'120px 96px',background:C.paper,borderBottom:`1px solid ${C.rule}`}}>
+    <SectionHead num="04" kicker="Color" title="A palette tuned across three families." intro="Greens anchor the brand — Forest Teal as primary, with Neo Mint as the accent. Blues bring the strategic, technology-forward register; purples add a contemporary, human counterpoint when warranted."/>
+    <div style={{display:'flex',flexDirection:'column',gap:48}}>
+      <ColorGroup title="Greens" sub="Primary family · brand-defining" chips={[{name:'Forest Teal',hex:'#0E6B5E',role:'Primary'},{name:'Neo Mint',hex:'#10B981',role:'Accent'},{name:'Aqua Foam',hex:'#6EE7C7',role:'Reversed primary'}]}/>
+      <ColorGroup title="Blues" sub="Strategic · technology-forward" chips={[{name:'Deep Navy',hex:'#1B1F4B',role:'Dark surface'},{name:'Electric Cobalt',hex:'#2D5BE3',role:'Action / link'},{name:'Sky Iris',hex:'#5B9BF0',role:'Highlight'}]}/>
+      <ColorGroup title="Purples" sub="Human · contemporary" chips={[{name:'Blue Iris',hex:'#3D4EBF',role:'Bridge'},{name:'Veri Peri Violet',hex:'#6B4FD8',role:'Editorial'},{name:'Periwinkle Bloom',hex:'#A78BFA',role:'Soft fill'}]}/>
+    </div>
+    <div style={{marginTop:56,padding:'32px 36px',background:C.paperWarm,borderRadius:8,display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:32}}>
+      {[['60','Forest Teal + Paper / Deep Navy','Primary surfaces — brand-defining ratio'],['30','Neo Mint + neutrals','Highlights, callouts, accent shapes'],['10','Blues + Purples','Editorial spots, data visualizations, secondary marks']].map(([pct,pair,desc])=>(
+        <div key={pct}>
+          <div style={{fontFamily:'"Inter Tight",system-ui,sans-serif',fontSize:44,fontWeight:600,letterSpacing:'-0.028em',color:C.forestTeal,lineHeight:1,marginBottom:8}}>{pct}<span style={{fontSize:20,color:'rgba(11,18,32,0.5)'}}>%</span></div>
+          <div style={{fontFamily:'"Inter",system-ui,sans-serif',fontSize:14,fontWeight:600,color:C.ink,marginBottom:4}}>{pair}</div>
+          <div style={{fontFamily:'"Inter",system-ui,sans-serif',fontSize:13,color:'rgba(11,18,32,0.6)',lineHeight:1.5}}>{desc}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+// ---- TYPOGRAPHY ----
+const Typography = () => {
+  const specimen=(weight,name)=>(
+    <div style={{display:'grid',gridTemplateColumns:'120px 1fr 90px',gap:24,alignItems:'baseline',padding:'20px 0',borderTop:`1px solid ${C.rule}`}}>
+      <span style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)'}}>{name}</span>
+      <span style={{fontFamily:'"Inter Tight",system-ui,sans-serif',fontWeight:weight,fontSize:38,letterSpacing:'-0.022em',color:C.ink,lineHeight:1.05}}>Thread the line through every signal.</span>
+      <span style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,color:'rgba(11,18,32,0.55)',textAlign:'right'}}>{weight}</span>
+    </div>
+  );
+  return (
+    <section style={{padding:'120px 96px',background:C.paper,borderBottom:`1px solid ${C.rule}`}}>
+      <SectionHead num="05" kicker="Typography" title="Inter Tight, set tight." intro="Inter Tight carries the wordmark and all display type. Inter handles body copy. JetBrains Mono labels metadata, code, and small captions where a fixed-width register signals data and rigor."/>
+      <div style={{display:'grid',gridTemplateColumns:'320px 1fr',gap:48}}>
+        <div style={{display:'flex',flexDirection:'column',gap:28}}>
+          {[{fam:'Inter Tight',use:'Display · headlines · wordmark',weights:'300 / 500 / 600 / 700'},{fam:'Inter',use:'Body · UI · long-form',weights:'400 / 500 / 600'},{fam:'JetBrains Mono',use:'Metadata · captions · code',weights:'400 / 500'}].map((t)=>(
+            <div key={t.fam} style={{paddingBottom:24,borderBottom:`1px solid ${C.rule}`}}>
+              <div style={{fontFamily:t.fam.includes('Mono')?'"JetBrains Mono",monospace':`"${t.fam}",sans-serif`,fontSize:28,fontWeight:600,letterSpacing:'-0.02em',color:C.ink,marginBottom:8}}>{t.fam}</div>
+              <div style={{fontFamily:'"Inter",system-ui,sans-serif',fontSize:14,color:'rgba(11,18,32,0.65)',marginBottom:6,lineHeight:1.5}}>{t.use}</div>
+              <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.10em',color:'rgba(11,18,32,0.5)'}}>{t.weights}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{background:C.paperWarm,borderRadius:8,padding:'36px 40px'}}>
+          <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.forestTeal,marginBottom:18,fontWeight:500}}>Inter Tight · weight scale</div>
+          {specimen(300,'Light')}{specimen(400,'Regular')}{specimen(500,'Medium')}{specimen(600,'Semibold')}{specimen(700,'Bold')}
+          <div style={{height:32}}/>
+          <div style={{fontFamily:'"JetBrains Mono",ui-monospace,monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.forestTeal,marginBottom:14,fontWeight:500}}>Hierarchy in use</div>
+          <div style={{display:'flex',flexDirection:'column',gap:18,paddingTop:8}}>
+            <div style={{fontFamily:'"Inter Tight",sans-serif',fontSize:56,fontWeight:600,letterSpacing:'-0.028em',color:C.ink,lineHeight:1.02,textWrap:'pretty'}}>Evaluation, built into the work.</div>
+            <div style={{fontFamily:'"Inter Tight",sans-serif',fontSize:22,fontWeight:400,letterSpacing:'-0.015em',color:'rgba(11,18,32,0.7)',lineHeight:1.3,maxWidth:580,textWrap:'pretty'}}>Workshops, agents, and measurement that thread through theory and implementation.</div>
+            <div style={{fontFamily:'"Inter",sans-serif',fontSize:15,fontWeight:400,color:'rgba(11,18,32,0.75)',lineHeight:1.6,maxWidth:580,textWrap:'pretty'}}>Body copy uses Inter for screen readability — 15–17 px, line-height 1.55–1.65. Avoid heavy weights in long-form text; let the headline carry voice while paragraphs stay quiet.</div>
+            <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.16em',textTransform:'uppercase',color:C.forestTeal,fontWeight:500}}>// metadata · code · captions</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ---- IN USE ----
+const InUse = () => (
+  <section style={{padding:'120px 96px',background:C.paperWarm,borderBottom:`1px solid ${C.rule}`}}>
+    <SectionHead num="06" kicker="In use" title="The system, deployed." intro="A snapshot of the identity across surfaces the firm actually ships — business card, app icon, deck cover, and web header."/>
+    <div style={{display:'grid',gridTemplateColumns:'1.05fr 1fr',gap:24}}>
+      {/* Business card */}
+      <div style={{background:'#E9E6DD',borderRadius:8,padding:'56px 48px',display:'flex',flexDirection:'column',gap:24,alignItems:'center',justifyContent:'center',minHeight:360}}>
+        <div style={{display:'flex',gap:18}}>
+          <div style={{width:280,height:168,background:C.paper,borderRadius:6,boxShadow:'0 30px 60px -20px rgba(11,18,32,0.35), 0 8px 16px -8px rgba(11,18,32,0.18)',padding:'22px 22px 20px',display:'flex',flexDirection:'column',justifyContent:'space-between',transform:'rotate(-2deg)'}}>
+            <ThrulineLockup size={20}/>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end'}}>
+              <div>
+                <div style={{fontFamily:'"Inter Tight",sans-serif',fontSize:13,fontWeight:600,color:C.ink,letterSpacing:'-0.01em'}}>Morgan Avery</div>
+                <div style={{fontFamily:'"Inter",sans-serif',fontSize:10,color:'rgba(11,18,32,0.6)',marginTop:3}}>Principal · Evaluation Practice</div>
+              </div>
+              <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:8,letterSpacing:'0.06em',color:'rgba(11,18,32,0.55)',textAlign:'right',lineHeight:1.55}}>thrulinedesign.co<br/>+1 415 555 0142</div>
+            </div>
+          </div>
+          <div style={{width:280,height:168,background:C.veriPeri,borderRadius:6,boxShadow:'0 30px 60px -20px rgba(11,18,32,0.35), 0 8px 16px -8px rgba(11,18,32,0.18)',display:'flex',alignItems:'center',justifyContent:'center',transform:'rotate(2deg)',position:'relative',overflow:'hidden'}}>
+            <ThrulineMark size={68} primary={C.periwinkle} accent={C.veriPeri}/>
+          </div>
+        </div>
+        <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)',marginTop:12}}>// Business card · 3.5 × 2 in</div>
+      </div>
+      {/* App icon */}
+      <div style={{background:C.paper,borderRadius:8,padding:'40px 36px',display:'flex',flexDirection:'column',gap:18,minHeight:360,border:`1px solid ${C.rule}`}}>
+        <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)'}}>// App icon · multi-surface</div>
+        <div style={{display:'flex',gap:16,alignItems:'center',justifyContent:'center',flex:1}}>
+          {[{bg:C.veriPeri,primary:C.periwinkle,accent:C.periwinkle,size:132},{bg:C.navy,primary:C.periwinkle,accent:C.veriPeri,size:96},{bg:C.paper,primary:C.veriPeri,accent:C.periwinkle,size:72,border:true}].map((cfg,i)=>(
+            <div key={i} style={{width:cfg.size,height:cfg.size,borderRadius:cfg.size*0.23,background:cfg.bg,border:cfg.border?`1px solid ${C.rule}`:'none',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 20px 40px -16px rgba(11,18,32,0.28), inset 0 1px 0 rgba(255,255,255,0.08)'}}>
+              <ThrulineMark size={cfg.size*0.62} primary={cfg.primary} accent={cfg.accent}/>
+            </div>
+          ))}
+        </div>
+        <div style={{display:'flex',justifyContent:'space-between',fontFamily:'"JetBrains Mono",monospace',fontSize:9,color:'rgba(11,18,32,0.5)',letterSpacing:'0.10em',textTransform:'uppercase'}}>
+          <span>1024 px</span><span>512 px</span><span>180 px</span>
+        </div>
+      </div>
+      {/* Slide cover */}
+      <div style={{background:C.navy,borderRadius:8,padding:0,gridColumn:'1 / 2',minHeight:320,position:'relative',overflow:'hidden'}}>
+        <div style={{aspectRatio:'16 / 9',padding:'40px 44px',display:'flex',flexDirection:'column',justifyContent:'space-between',position:'relative'}}>
+          <div style={{position:'absolute',top:80,left:0,right:0,height:2,background:C.periwinkle,opacity:0.22}}/>
+          <ThrulineLockup size={26} color={C.paper} primary={C.periwinkle} accent={C.veriPeri}/>
+          <div>
+            <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.16em',textTransform:'uppercase',color:C.periwinkle,marginBottom:14,fontWeight:500}}>// Q3 Briefing</div>
+            <div style={{fontFamily:'"Inter Tight",sans-serif',fontSize:44,fontWeight:600,letterSpacing:'-0.025em',color:C.paper,lineHeight:1.02,marginBottom:14,maxWidth:540,textWrap:'pretty'}}>Measuring change in the time of agents.</div>
+            <div style={{fontFamily:'"Inter",sans-serif',fontSize:14,color:'rgba(250,250,247,0.62)',maxWidth:480,lineHeight:1.55,textWrap:'pretty'}}>An R&amp;D briefing for evaluation, coaching, and change-management practitioners working at the front edge of AI deployment.</div>
+          </div>
+        </div>
+        <div style={{position:'absolute',bottom:12,right:16,fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(250,250,247,0.45)'}}>// Slide cover · 16:9</div>
+      </div>
+      {/* Web header */}
+      <div style={{background:C.paper,borderRadius:8,padding:0,minHeight:320,border:`1px solid ${C.rule}`,overflow:'hidden',display:'flex',flexDirection:'column'}}>
+        <div style={{padding:'18px 24px',borderBottom:`1px solid ${C.rule}`,display:'flex',alignItems:'center',justifyContent:'space-between',gap:32}}>
+          <ThrulineLockup size={16}/>
+          <div style={{display:'flex',gap:18,fontFamily:'"Inter",sans-serif',fontSize:12,color:'rgba(11,18,32,0.75)',alignItems:'center',flex:'0 0 auto'}}>
+            <span>Practice</span><span>Research</span><span>Agents</span><span>About</span>
+            <span style={{background:C.veriPeri,color:C.paper,padding:'6px 12px',borderRadius:999,fontSize:11,fontWeight:500}}>Engage</span>
+          </div>
+        </div>
+        <div style={{padding:'36px 32px',flex:1,display:'flex',flexDirection:'column',justifyContent:'center'}}>
+          <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.16em',textTransform:'uppercase',color:C.veriPeri,marginBottom:12,fontWeight:500}}>// Evaluation · Change · Coaching</div>
+          <div style={{fontFamily:'"Inter Tight",sans-serif',fontSize:38,fontWeight:600,letterSpacing:'-0.028em',color:C.ink,lineHeight:1.04,marginBottom:12,maxWidth:520,textWrap:'pretty'}}>The throughline between research, practice, and outcome.</div>
+          <div style={{fontFamily:'"Inter",sans-serif',fontSize:14,color:'rgba(11,18,32,0.68)',lineHeight:1.55,maxWidth:460,textWrap:'pretty'}}>Agents and workshops built for the realities of corporate change. Evidence-led, human-anchored, technology-forward.</div>
+        </div>
+        <div style={{padding:'10px 16px',background:C.paperWarm,borderTop:`1px solid ${C.rule}`,fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)',textAlign:'right'}}>// Web header · thrulinedesign.co</div>
+      </div>
+    </div>
+  </section>
+);
+
+// ---- MISUSE ----
+const Misuse = () => {
+  const DontFrame = ({ children, label }) => (
+    <div style={{background:C.paper,borderRadius:6,border:`1px solid ${C.rule}`,padding:'32px 24px 18px',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'space-between',minHeight:220,position:'relative'}}>
+      <div style={{position:'absolute',top:12,left:12,width:14,height:14,borderRadius:'50%',background:'#D14A4A'}}/>
+      <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',padding:'12px 0'}}>{children}</div>
+      <div style={{fontFamily:'"Inter",sans-serif',fontSize:13,color:C.ink,textAlign:'center',lineHeight:1.4,textWrap:'pretty',marginTop:8}}>{label}</div>
+    </div>
+  );
+  return (
+    <section style={{padding:'120px 96px',background:C.paper,borderBottom:`1px solid ${C.rule}`}}>
+      <SectionHead num="07" kicker="Misuse" title="Hold the line." intro="The mark loses meaning when its construction is altered. These cases are out of bounds."/>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(4, 1fr)',gap:16}}>
+        <DontFrame label="Don't recolor outside the system."><ThrulineLockup size={32} color="#D14A4A" primary="#D14A4A" accent="#FF9F1C"/></DontFrame>
+        <DontFrame label="Don't stretch or distort."><div style={{transform:'scaleX(1.6)'}}><ThrulineLockup size={32}/></div></DontFrame>
+        <DontFrame label="Don't add effects or shadows."><div style={{filter:'drop-shadow(0 6px 8px rgba(11,18,32,0.4))'}}><ThrulineLockup size={32}/></div></DontFrame>
+        <DontFrame label="Don't rotate the lockup."><div style={{transform:'rotate(-12deg)'}}><ThrulineLockup size={32}/></div></DontFrame>
+        <DontFrame label="Don't lose the crossbar extension.">
+          <svg width="180" height="80" viewBox="0 0 180 80" fill="none">
+            <path d="M 42 38 Q 58 32.2, 74 38" stroke={C.veriPeri} strokeWidth="6" strokeLinecap="round" fill="none"/>
+            <rect x="55" y="35" width="8" height="34" rx="4" fill={C.veriPeri}/>
+            <circle cx="44" cy="38" r="6" fill={C.periwinkle}/>
+            <text x="84" y="60" fontFamily="Inter Tight" fontSize="32" fontWeight="600" letterSpacing="-0.7" fill={C.ink}>line</text>
+          </svg>
+        </DontFrame>
+        <DontFrame label="Don't drop the accent dot.">
+          <svg width="220" height="80" viewBox="0 0 220 80" fill="none">
+            <path d="M 8 38 Q 47 32.2, 86 38" stroke={C.veriPeri} strokeWidth="6" strokeLinecap="round" fill="none"/>
+            <rect x="67" y="34" width="8" height="38" rx="4" fill={C.veriPeri}/>
+            <text x="84" y="64" fontFamily="Inter Tight" fontSize="32" fontWeight="600" letterSpacing="-0.7" fill={C.ink}>hruline</text>
+          </svg>
+        </DontFrame>
+        <DontFrame label="Don't crowd the clear space.">
+          <div style={{display:'flex',alignItems:'center',gap:6,border:'1px solid rgba(11,18,32,0.3)',padding:'4px 6px',borderRadius:4}}>
+            <ThrulineLockup size={26}/>
+          </div>
+        </DontFrame>
+        <DontFrame label="Don't place on busy or low-contrast surfaces.">
+          <div style={{background:'linear-gradient(120deg, #6B4FD8, #2D5BE3 40%, #10B981 80%)',padding:'20px 16px',borderRadius:4}}>
+            <ThrulineLockup size={28} color={C.veriPeri} primary={C.veriPeri} accent={C.periwinkle}/>
+          </div>
+        </DontFrame>
+      </div>
+    </section>
+  );
+};
+
+// ---- DOWNLOADS ----
+// SVG content generated inline from brand components so files are always available
+const SVGS = {
+  'thruline-horizontal.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none"><path d="M 10.52 15.87 Q 79.65 10.07, 148.78 15.87" stroke="#6B4FD8" stroke-width="9.2" stroke-linecap="round" fill="none"/><rect x="129.37" y="10.37" width="10.82" height="59.63" rx="5.41" fill="#6B4FD8"/><circle cx="10.52" cy="15.87" r="9.2" fill="#A78BFA"/><text x="148" y="67" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="600" letter-spacing="-1.2" fill="#0B1220">hruline</text><text x="247" y="67" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="300" letter-spacing="-1.2" fill="#0B1220" opacity="0.7">Design</text></svg>`,
+  'thruline-horizontal-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none"><path d="M 10.52 15.87 Q 79.65 10.07, 148.78 15.87" stroke="#A78BFA" stroke-width="9.2" stroke-linecap="round" fill="none"/><rect x="129.37" y="10.37" width="10.82" height="59.63" rx="5.41" fill="#A78BFA"/><circle cx="10.52" cy="15.87" r="9.2" fill="#6B4FD8"/><text x="148" y="67" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="600" letter-spacing="-1.2" fill="#FAFAF7">hruline</text><text x="247" y="67" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="300" letter-spacing="-1.2" fill="#FAFAF7" opacity="0.7">Design</text></svg>`,
+  'thruline-mark.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke="#6B4FD8" stroke-width="8.74" stroke-linecap="round" fill="none"/><rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill="#6B4FD8"/><circle cx="10.27" cy="22" r="8.74" fill="#A78BFA"/></svg>`,
+  'thruline-mark-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke="#A78BFA" stroke-width="8.74" stroke-linecap="round" fill="none"/><rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill="#A78BFA"/><circle cx="10.27" cy="22" r="8.74" fill="#6B4FD8"/></svg>`,
+  'thruline-mark-mono-dark.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke="#0B1220" stroke-width="8.74" stroke-linecap="round" fill="none"/><rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill="#0B1220"/><circle cx="10.27" cy="22" r="8.74" fill="#0B1220"/></svg>`,
+  'thruline-mark-mono-light.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke="#FAFAF7" stroke-width="8.74" stroke-linecap="round" fill="none"/><rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill="#FAFAF7"/><circle cx="10.27" cy="22" r="8.74" fill="#FAFAF7"/></svg>`,
+  'thruline-stacked.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none"><path d="M 8.12 12.12 Q 58.65 7.72, 109.18 12.12" stroke="#6B4FD8" stroke-width="7.08" stroke-linecap="round" fill="none"/><rect x="94.27" y="7.58" width="8.3" height="56.42" rx="4.15" fill="#6B4FD8"/><circle cx="8.12" cy="12.12" r="7.08" fill="#A78BFA"/><text x="98" y="52" font-family="Inter Tight, system-ui, sans-serif" font-size="37" font-weight="600" letter-spacing="-0.93" fill="#0B1220">hruline</text><text x="8" y="96" font-family="Inter Tight, system-ui, sans-serif" font-size="37" font-weight="300" letter-spacing="-0.93" fill="#0B1220" opacity="0.7">Design</text></svg>`,
+  'thruline-stacked-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none"><path d="M 8.12 12.12 Q 58.65 7.72, 109.18 12.12" stroke="#A78BFA" stroke-width="7.08" stroke-linecap="round" fill="none"/><rect x="94.27" y="7.58" width="8.3" height="56.42" rx="4.15" fill="#A78BFA"/><circle cx="8.12" cy="12.12" r="7.08" fill="#6B4FD8"/><text x="98" y="52" font-family="Inter Tight, system-ui, sans-serif" font-size="37" font-weight="600" letter-spacing="-0.93" fill="#FAFAF7">hruline</text><text x="8" y="96" font-family="Inter Tight, system-ui, sans-serif" font-size="37" font-weight="300" letter-spacing="-0.93" fill="#FAFAF7" opacity="0.7">Design</text></svg>`,
+  'thruline-wordmark.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" fill="none"><text x="0" y="48" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="600" letter-spacing="-1.2" fill="#0B1220">Thruline</text><text x="196" y="48" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="300" letter-spacing="-1.2" fill="#0B1220" opacity="0.7">Design</text></svg>`,
+  'thruline-wordmark-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" fill="none"><text x="0" y="48" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="600" letter-spacing="-1.2" fill="#FAFAF7">Thruline</text><text x="196" y="48" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="300" letter-spacing="-1.2" fill="#FAFAF7" opacity="0.7">Design</text></svg>`,
+  'thruline-app-icon.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="none"><rect width="1024" height="1024" rx="235" fill="#6B4FD8"/><path d="M 105.17 225.28 Q 512 138.24 918.83 225.28" stroke="#A78BFA" stroke-width="89.5" stroke-linecap="round" fill="none"/><rect x="722.93" y="158.53" width="105.14" height="762.97" rx="52.57" fill="#A78BFA"/><circle cx="105.17" cy="225.28" r="89.5" fill="#6B4FD8"/></svg>`,
+  'thruline-favicon.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M 3.3 8 Q 15.9 5.32, 28.5 8" stroke="#6B4FD8" stroke-width="2.8" stroke-linecap="round" fill="none"/><rect x="22.55" y="5.74" width="3.3" height="23.26" rx="1.65" fill="#6B4FD8"/><circle cx="3.3" cy="8" r="2.8" fill="#A78BFA"/></svg>`,
+  'thruline-favicon-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M 3.3 8 Q 15.9 5.32, 28.5 8" stroke="#A78BFA" stroke-width="2.8" stroke-linecap="round" fill="none"/><rect x="22.55" y="5.74" width="3.3" height="23.26" rx="1.65" fill="#A78BFA"/><circle cx="3.3" cy="8" r="2.8" fill="#6B4FD8"/></svg>`,
+};
+
+const downloadSVG = (filename, content) => {
+  const blob = new Blob([content], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+const Downloads = () => {
+  const FileRow = ({ name, filename, format }) => (
+    <button
+      onClick={() => downloadSVG(filename, SVGS[filename])}
+      style={{display:'grid',gridTemplateColumns:'1fr auto',alignItems:'center',gap:16,padding:'14px 18px',background:C.paper,borderRadius:4,border:`1px solid ${C.rule}`,textDecoration:'none',color:C.ink,cursor:'pointer',width:'100%',textAlign:'left',transition:'background 0.15s'}}
+      onMouseEnter={e=>e.currentTarget.style.background=C.paperWarm}
+      onMouseLeave={e=>e.currentTarget.style.background=C.paper}
+    >
+      <span style={{fontFamily:'"Inter",sans-serif',fontSize:14,fontWeight:500,letterSpacing:'-0.01em'}}>{name}</span>
+      <span style={{fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.10em',textTransform:'uppercase',color:C.periwinkle,fontWeight:500}}>↓ {format}</span>
+    </button>
+  );
+
+  return (
+    <section style={{padding:'120px 96px 80px',background:C.paperDark,color:C.paper}}>
+      <div style={{display:'flex',alignItems:'baseline',gap:18,marginBottom:18}}>
+        <span style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.16em',textTransform:'uppercase',color:C.periwinkle,fontWeight:500}}>08 · Assets</span>
+        <div style={{flex:1,height:1,background:C.ruleDark}}/>
+      </div>
+      <h2 style={{fontFamily:'"Inter Tight",sans-serif',fontSize:48,fontWeight:600,letterSpacing:'-0.028em',color:C.paper,margin:'0 0 14px',lineHeight:1.04}}>Export-ready files.</h2>
+      <p style={{fontFamily:'"Inter",sans-serif',fontSize:16,lineHeight:1.6,color:'rgba(250,250,247,0.65)',margin:'0 0 56px',maxWidth:560}}>All logos are provided as SVG. Click any file to download. Use these masters; do not regenerate the mark from screenshots.</p>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:32}}>
+        <div>
+          <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.periwinkle,marginBottom:14,fontWeight:500}}>Horizontal lockup</div>
+          <div style={{display:'flex',flexDirection:'column',gap:8}}>
+            <FileRow name="Horizontal · primary" filename="thruline-horizontal.svg" format="svg"/>
+            <FileRow name="Horizontal · reversed" filename="thruline-horizontal-reversed.svg" format="svg"/>
+          </div>
+        </div>
+        <div>
+          <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.periwinkle,marginBottom:14,fontWeight:500}}>Stacked lockup</div>
+          <div style={{display:'flex',flexDirection:'column',gap:8}}>
+            <FileRow name="Stacked · primary" filename="thruline-stacked.svg" format="svg"/>
+            <FileRow name="Stacked · reversed" filename="thruline-stacked-reversed.svg" format="svg"/>
+          </div>
+        </div>
+        <div>
+          <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.periwinkle,marginBottom:14,fontWeight:500}}>Wordmark</div>
+          <div style={{display:'flex',flexDirection:'column',gap:8}}>
+            <FileRow name="Wordmark · primary" filename="thruline-wordmark.svg" format="svg"/>
+            <FileRow name="Wordmark · reversed" filename="thruline-wordmark-reversed.svg" format="svg"/>
+          </div>
+        </div>
+        <div>
+          <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.periwinkle,marginBottom:14,fontWeight:500}}>Mark</div>
+          <div style={{display:'flex',flexDirection:'column',gap:8}}>
+            <FileRow name="Mark · primary" filename="thruline-mark.svg" format="svg"/>
+            <FileRow name="Mark · reversed" filename="thruline-mark-reversed.svg" format="svg"/>
+            <FileRow name="Mark · mono (dark)" filename="thruline-mark-mono-dark.svg" format="svg"/>
+            <FileRow name="Mark · mono (light)" filename="thruline-mark-mono-light.svg" format="svg"/>
+          </div>
+        </div>
+        <div>
+          <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.periwinkle,marginBottom:14,fontWeight:500}}>App icon</div>
+          <div style={{display:'flex',flexDirection:'column',gap:8}}>
+            <FileRow name="App icon · 1024" filename="thruline-app-icon.svg" format="svg"/>
+          </div>
+        </div>
+        <div>
+          <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.periwinkle,marginBottom:14,fontWeight:500}}>Favicon</div>
+          <div style={{display:'flex',flexDirection:'column',gap:8}}>
+            <FileRow name="Favicon · primary" filename="thruline-favicon.svg" format="svg"/>
+            <FileRow name="Favicon · reversed" filename="thruline-favicon-reversed.svg" format="svg"/>
+          </div>
+        </div>
+      </div>
+      <div style={{marginTop:96,paddingTop:28,borderTop:`1px solid ${C.ruleDark}`,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+        <ThrulineLockup size={22} color={C.paper} primary={C.periwinkle} accent={C.veriPeri}/>
+        <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.16em',textTransform:'uppercase',color:'rgba(250,250,247,0.5)'}}>Brand pack v1.0 · May 2026 · © Thruline Design</div>
+      </div>
+    </section>
+  );
+};
+
+// ---- APP ----
+const App = () => (
+  <div style={{background:'#FAFAF7',minHeight:'100vh'}}>
+    <Cover/>
+    <Anatomy/>
+    <LogoFamily/>
+    <ClearSpace/>
+    <Colors/>
+    <Typography/>
+    <InUse/>
+    <Misuse/>
+    <Downloads/>
+  </div>
+);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
+  </script>
+</body>
+</html>

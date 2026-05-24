@@ -411,7 +411,7 @@ const InUse = () => (
             </div>
           </div>
           <div style={{width:280,height:168,background:C.veriPeri,borderRadius:6,boxShadow:'0 30px 60px -20px rgba(11,18,32,0.35), 0 8px 16px -8px rgba(11,18,32,0.18)',display:'flex',alignItems:'center',justifyContent:'center',transform:'rotate(2deg)',position:'relative',overflow:'hidden'}}>
-            <ThrulineMark size={68} primary={C.periwinkle} accent={C.veriPeri}/>
+            <ThrulineMark size={68} primary={C.periwinkle} accent={C.periwinkle}/>
           </div>
         </div>
         <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:10,letterSpacing:'0.14em',textTransform:'uppercase',color:'rgba(11,18,32,0.55)',marginTop:12}}>// Business card · 3.5 × 2 in</div>
@@ -521,7 +521,7 @@ const AppIconSVG = ({ size=1024 }) => {
       <rect width={size} height={size} rx={size*0.23} fill={C.veriPeri}/>
       <path d={`M ${startX} ${barY} Q ${midX} ${barY-2*arcLift} ${endX} ${barY}`} stroke={C.periwinkle} strokeWidth={barH} strokeLinecap="round" fill="none"/>
       <rect x={stemX-stemW/2} y={stemTop} width={stemW} height={size*0.9-stemTop} rx={stemW/2} fill={C.periwinkle}/>
-      <circle cx={startX} cy={barY} r={dotR} fill={C.veriPeri}/>
+      <circle cx={startX} cy={barY} r={dotR} fill={C.periwinkle}/>
     </svg>
   );
 };

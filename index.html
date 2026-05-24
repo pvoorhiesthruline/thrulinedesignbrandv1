@@ -511,17 +511,17 @@ const Misuse = () => {
 };
 
 // ---- DOWNLOADS ----
-const AppIconSVG = ({ size=1024 }) => {
+const AppIconSVG = ({ size=1024, bg=C.veriPeri, primary=C.periwinkle, accent=C.periwinkle }) => {
   const s=size/100;
   const barY=22*s,barH=8.74*s,arcLift=4.18*s,startX=10.27*s,endX=89.03*s;
   const midX=(startX+endX)/2,stemX=75.65*s,stemW=10.26*s,dotR=8.74*s;
   const t=(stemX-startX)/(endX-startX),yAtStem=barY-4*arcLift*t*(1-t),stemTop=yAtStem-barH/2;
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none">
-      <rect width={size} height={size} rx={size*0.23} fill={C.veriPeri}/>
-      <path d={`M ${startX} ${barY} Q ${midX} ${barY-2*arcLift} ${endX} ${barY}`} stroke={C.periwinkle} strokeWidth={barH} strokeLinecap="round" fill="none"/>
-      <rect x={stemX-stemW/2} y={stemTop} width={stemW} height={size*0.9-stemTop} rx={stemW/2} fill={C.periwinkle}/>
-      <circle cx={startX} cy={barY} r={dotR} fill={C.periwinkle}/>
+      <rect width={size} height={size} rx={size*0.23} fill={bg}/>
+      <path d={`M ${startX} ${barY} Q ${midX} ${barY-2*arcLift} ${endX} ${barY}`} stroke={primary} strokeWidth={barH} strokeLinecap="round" fill="none"/>
+      <rect x={stemX-stemW/2} y={stemTop} width={stemW} height={size*0.9-stemTop} rx={stemW/2} fill={primary}/>
+      <circle cx={startX} cy={barY} r={dotR} fill={accent}/>
     </svg>
   );
 };
@@ -537,7 +537,9 @@ const LOGO_ASSETS = {
   'thruline-mark-reversed.svg':       [ThrulineMark,     {size:200, primary:C.periwinkle, accent:C.veriPeri},   true],
   'thruline-mark-mono-dark.svg':      [ThrulineMark,     {size:200, primary:C.ink,   accent:C.ink},   true],
   'thruline-mark-mono-light.svg':     [ThrulineMark,     {size:200, primary:C.paper, accent:C.paper}, true],
-  'thruline-app-icon.svg':            [AppIconSVG,       {size:1024}, true],
+  'thruline-app-icon-veri-peri.svg':  [AppIconSVG, {size:1024, bg:C.veriPeri, primary:C.periwinkle, accent:C.periwinkle}, true],
+  'thruline-app-icon-navy.svg':       [AppIconSVG, {size:1024, bg:C.navy,     primary:C.periwinkle, accent:C.veriPeri},   true],
+  'thruline-app-icon-light.svg':      [AppIconSVG, {size:1024, bg:C.paper,    primary:C.veriPeri,   accent:C.periwinkle}, true],
   'thruline-favicon.svg':             [ThrulineFavicon,  {size:64, primary:C.veriPeri,   accent:C.periwinkle}, true],
   'thruline-favicon-reversed.svg':    [ThrulineFavicon,  {size:64, primary:C.periwinkle, accent:C.veriPeri},   true],
 };
@@ -632,7 +634,9 @@ const Downloads = () => {
         <div>
           <div style={{fontFamily:'"JetBrains Mono",monospace',fontSize:11,letterSpacing:'0.14em',textTransform:'uppercase',color:C.periwinkle,marginBottom:14,fontWeight:500}}>App icon</div>
           <div style={{display:'flex',flexDirection:'column',gap:8}}>
-            <FileRow name="App icon · 1024" filename="thruline-app-icon.svg" format="svg"/>
+            <FileRow name="App icon · Veri Peri" filename="thruline-app-icon-veri-peri.svg" format="svg"/>
+            <FileRow name="App icon · Navy" filename="thruline-app-icon-navy.svg" format="svg"/>
+            <FileRow name="App icon · Light" filename="thruline-app-icon-light.svg" format="svg"/>
           </div>
         </div>
         <div>

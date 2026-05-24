@@ -547,31 +547,34 @@ const downloadLogo = (filename, Component, props, asSVG) => {
   wrap.style.cssText = 'position:fixed;top:-9999px;left:-9999px;pointer-events:none';
   document.body.appendChild(wrap);
   const tmp = ReactDOM.createRoot(wrap);
-  tmp.render(React.createElement(Component, props));
-  setTimeout(() => {
-    let svgStr;
-    if (asSVG) {
-      const svgEl = wrap.querySelector('svg');
-      const ser = new XMLSerializer();
-      svgStr = ser.serializeToString(svgEl);
-      if (!svgStr.includes('xmlns="http://www.w3.org/2000/svg"'))
-        svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
-    } else {
-      const el = wrap.firstChild;
-      const r = el.getBoundingClientRect();
-      const p = 8;
-      const w = Math.ceil(r.width) + p * 2, h = Math.ceil(r.height) + p * 2;
-      const fontUrl = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500;600;700&amp;display=swap';
-      svgStr = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${w}" height="${h}"><defs><style>@import url('${fontUrl}');</style></defs><foreignObject x="0" y="0" width="${w}" height="${h}"><div xmlns="http://www.w3.org/1999/xhtml" style="padding:${p}px;line-height:1">${el.outerHTML}</div></foreignObject></svg>`;
-    }
-    tmp.unmount();
-    wrap.remove();
-    const blob = new Blob([svgStr], {type:'image/svg+xml'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = filename; a.click();
-    URL.revokeObjectURL(url);
-  }, 150);
+  // flushSync forces the render to complete synchronously before we read the DOM
+  ReactDOM.flushSync(() => tmp.render(React.createElement(Component, props)));
+
+  let svgStr;
+  if (asSVG) {
+    const svgEl = wrap.querySelector('svg');
+    const ser = new XMLSerializer();
+    svgStr = ser.serializeToString(svgEl);
+    if (!svgStr.includes('xmlns="http://www.w3.org/2000/svg"'))
+      svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+  } else {
+    const el = wrap.firstChild;
+    const r = el.getBoundingClientRect();
+    const p = 8;
+    const w = Math.ceil(r.width) + p * 2, h = Math.ceil(r.height) + p * 2;
+    // outerHTML omits xmlns on SVG elements (fine in HTML, broken in XML/SVG context)
+    const html = el.outerHTML.replace(/<svg /g, '<svg xmlns="http://www.w3.org/2000/svg" ');
+    const fontUrl = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500;600;700&amp;display=swap';
+    svgStr = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${w}" height="${h}"><defs><style>@import url('${fontUrl}');</style></defs><foreignObject x="0" y="0" width="${w}" height="${h}"><div xmlns="http://www.w3.org/1999/xhtml" style="padding:${p}px;line-height:1">${html}</div></foreignObject></svg>`;
+  }
+
+  tmp.unmount();
+  wrap.remove();
+  const blob = new Blob([svgStr], {type:'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
 };
 
 const Downloads = () => {

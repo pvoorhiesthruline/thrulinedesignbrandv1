@@ -511,37 +511,73 @@ const Misuse = () => {
 };
 
 // ---- DOWNLOADS ----
-// SVG content generated inline from brand components so files are always available
-const SVGS = {
-  'thruline-horizontal.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none"><path d="M 10.52 15.87 Q 79.65 10.07, 148.78 15.87" stroke="#6B4FD8" stroke-width="9.2" stroke-linecap="round" fill="none"/><rect x="129.37" y="10.37" width="10.82" height="59.63" rx="5.41" fill="#6B4FD8"/><circle cx="10.52" cy="15.87" r="9.2" fill="#A78BFA"/><text x="148" y="67" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="600" letter-spacing="-1.2" fill="#0B1220">hruline</text><text x="247" y="67" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="300" letter-spacing="-1.2" fill="#0B1220" opacity="0.7">Design</text></svg>`,
-  'thruline-horizontal-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none"><path d="M 10.52 15.87 Q 79.65 10.07, 148.78 15.87" stroke="#A78BFA" stroke-width="9.2" stroke-linecap="round" fill="none"/><rect x="129.37" y="10.37" width="10.82" height="59.63" rx="5.41" fill="#A78BFA"/><circle cx="10.52" cy="15.87" r="9.2" fill="#6B4FD8"/><text x="148" y="67" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="600" letter-spacing="-1.2" fill="#FAFAF7">hruline</text><text x="247" y="67" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="300" letter-spacing="-1.2" fill="#FAFAF7" opacity="0.7">Design</text></svg>`,
-  'thruline-mark.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke="#6B4FD8" stroke-width="8.74" stroke-linecap="round" fill="none"/><rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill="#6B4FD8"/><circle cx="10.27" cy="22" r="8.74" fill="#A78BFA"/></svg>`,
-  'thruline-mark-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke="#A78BFA" stroke-width="8.74" stroke-linecap="round" fill="none"/><rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill="#A78BFA"/><circle cx="10.27" cy="22" r="8.74" fill="#6B4FD8"/></svg>`,
-  'thruline-mark-mono-dark.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke="#0B1220" stroke-width="8.74" stroke-linecap="round" fill="none"/><rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill="#0B1220"/><circle cx="10.27" cy="22" r="8.74" fill="#0B1220"/></svg>`,
-  'thruline-mark-mono-light.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M 10.27 22 Q 49.65 13.65, 89.03 22" stroke="#FAFAF7" stroke-width="8.74" stroke-linecap="round" fill="none"/><rect x="70.52" y="15.49" width="10.26" height="74.51" rx="5.13" fill="#FAFAF7"/><circle cx="10.27" cy="22" r="8.74" fill="#FAFAF7"/></svg>`,
-  'thruline-stacked.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none"><path d="M 8.12 12.12 Q 58.65 7.72, 109.18 12.12" stroke="#6B4FD8" stroke-width="7.08" stroke-linecap="round" fill="none"/><rect x="94.27" y="7.58" width="8.3" height="56.42" rx="4.15" fill="#6B4FD8"/><circle cx="8.12" cy="12.12" r="7.08" fill="#A78BFA"/><text x="98" y="52" font-family="Inter Tight, system-ui, sans-serif" font-size="37" font-weight="600" letter-spacing="-0.93" fill="#0B1220">hruline</text><text x="8" y="96" font-family="Inter Tight, system-ui, sans-serif" font-size="37" font-weight="300" letter-spacing="-0.93" fill="#0B1220" opacity="0.7">Design</text></svg>`,
-  'thruline-stacked-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" fill="none"><path d="M 8.12 12.12 Q 58.65 7.72, 109.18 12.12" stroke="#A78BFA" stroke-width="7.08" stroke-linecap="round" fill="none"/><rect x="94.27" y="7.58" width="8.3" height="56.42" rx="4.15" fill="#A78BFA"/><circle cx="8.12" cy="12.12" r="7.08" fill="#6B4FD8"/><text x="98" y="52" font-family="Inter Tight, system-ui, sans-serif" font-size="37" font-weight="600" letter-spacing="-0.93" fill="#FAFAF7">hruline</text><text x="8" y="96" font-family="Inter Tight, system-ui, sans-serif" font-size="37" font-weight="300" letter-spacing="-0.93" fill="#FAFAF7" opacity="0.7">Design</text></svg>`,
-  'thruline-wordmark.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" fill="none"><text x="0" y="48" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="600" letter-spacing="-1.2" fill="#0B1220">Thruline</text><text x="196" y="48" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="300" letter-spacing="-1.2" fill="#0B1220" opacity="0.7">Design</text></svg>`,
-  'thruline-wordmark-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" fill="none"><text x="0" y="48" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="600" letter-spacing="-1.2" fill="#FAFAF7">Thruline</text><text x="196" y="48" font-family="Inter Tight, system-ui, sans-serif" font-size="48" font-weight="300" letter-spacing="-1.2" fill="#FAFAF7" opacity="0.7">Design</text></svg>`,
-  'thruline-app-icon.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="none"><rect width="1024" height="1024" rx="235" fill="#6B4FD8"/><path d="M 105.17 225.28 Q 512 138.24 918.83 225.28" stroke="#A78BFA" stroke-width="89.5" stroke-linecap="round" fill="none"/><rect x="722.93" y="158.53" width="105.14" height="762.97" rx="52.57" fill="#A78BFA"/><circle cx="105.17" cy="225.28" r="89.5" fill="#6B4FD8"/></svg>`,
-  'thruline-favicon.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M 3.3 8 Q 15.9 5.32, 28.5 8" stroke="#6B4FD8" stroke-width="2.8" stroke-linecap="round" fill="none"/><rect x="22.55" y="5.74" width="3.3" height="23.26" rx="1.65" fill="#6B4FD8"/><circle cx="3.3" cy="8" r="2.8" fill="#A78BFA"/></svg>`,
-  'thruline-favicon-reversed.svg': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M 3.3 8 Q 15.9 5.32, 28.5 8" stroke="#A78BFA" stroke-width="2.8" stroke-linecap="round" fill="none"/><rect x="22.55" y="5.74" width="3.3" height="23.26" rx="1.65" fill="#A78BFA"/><circle cx="3.3" cy="8" r="2.8" fill="#6B4FD8"/></svg>`,
+const AppIconSVG = ({ size=1024 }) => {
+  const s=size/100;
+  const barY=22*s,barH=8.74*s,arcLift=4.18*s,startX=10.27*s,endX=89.03*s;
+  const midX=(startX+endX)/2,stemX=75.65*s,stemW=10.26*s,dotR=8.74*s;
+  const t=(stemX-startX)/(endX-startX),yAtStem=barY-4*arcLift*t*(1-t),stemTop=yAtStem-barH/2;
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none">
+      <rect width={size} height={size} rx={size*0.23} fill={C.veriPeri}/>
+      <path d={`M ${startX} ${barY} Q ${midX} ${barY-2*arcLift} ${endX} ${barY}`} stroke={C.periwinkle} strokeWidth={barH} strokeLinecap="round" fill="none"/>
+      <rect x={stemX-stemW/2} y={stemTop} width={stemW} height={size*0.9-stemTop} rx={stemW/2} fill={C.periwinkle}/>
+      <circle cx={startX} cy={barY} r={dotR} fill={C.veriPeri}/>
+    </svg>
+  );
 };
 
-const downloadSVG = (filename, content) => {
-  const blob = new Blob([content], { type: 'image/svg+xml' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
+const LOGO_ASSETS = {
+  'thruline-horizontal.svg':          [ThrulineLockup,   {size:64, color:C.ink,   primary:C.veriPeri,   accent:C.periwinkle}, false],
+  'thruline-horizontal-reversed.svg': [ThrulineLockup,   {size:64, color:C.paper, primary:C.periwinkle, accent:C.veriPeri},   false],
+  'thruline-stacked.svg':             [ThrulineStacked,  {size:56, color:C.ink,   primary:C.veriPeri,   accent:C.periwinkle}, false],
+  'thruline-stacked-reversed.svg':    [ThrulineStacked,  {size:56, color:C.paper, primary:C.periwinkle, accent:C.veriPeri},   false],
+  'thruline-wordmark.svg':            [ThrulineWordmark, {size:64, color:C.ink},   false],
+  'thruline-wordmark-reversed.svg':   [ThrulineWordmark, {size:64, color:C.paper}, false],
+  'thruline-mark.svg':                [ThrulineMark,     {size:200, primary:C.veriPeri,   accent:C.periwinkle}, true],
+  'thruline-mark-reversed.svg':       [ThrulineMark,     {size:200, primary:C.periwinkle, accent:C.veriPeri},   true],
+  'thruline-mark-mono-dark.svg':      [ThrulineMark,     {size:200, primary:C.ink,   accent:C.ink},   true],
+  'thruline-mark-mono-light.svg':     [ThrulineMark,     {size:200, primary:C.paper, accent:C.paper}, true],
+  'thruline-app-icon.svg':            [AppIconSVG,       {size:1024}, true],
+  'thruline-favicon.svg':             [ThrulineFavicon,  {size:64, primary:C.veriPeri,   accent:C.periwinkle}, true],
+  'thruline-favicon-reversed.svg':    [ThrulineFavicon,  {size:64, primary:C.periwinkle, accent:C.veriPeri},   true],
+};
+
+const downloadLogo = (filename, Component, props, asSVG) => {
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:fixed;top:-9999px;left:-9999px;pointer-events:none';
+  document.body.appendChild(wrap);
+  const tmp = ReactDOM.createRoot(wrap);
+  tmp.render(React.createElement(Component, props));
+  setTimeout(() => {
+    let svgStr;
+    if (asSVG) {
+      const svgEl = wrap.querySelector('svg');
+      const ser = new XMLSerializer();
+      svgStr = ser.serializeToString(svgEl);
+      if (!svgStr.includes('xmlns="http://www.w3.org/2000/svg"'))
+        svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+    } else {
+      const el = wrap.firstChild;
+      const r = el.getBoundingClientRect();
+      const p = 8;
+      const w = Math.ceil(r.width) + p * 2, h = Math.ceil(r.height) + p * 2;
+      const fontUrl = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500;600;700&amp;display=swap';
+      svgStr = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${w}" height="${h}"><defs><style>@import url('${fontUrl}');</style></defs><foreignObject x="0" y="0" width="${w}" height="${h}"><div xmlns="http://www.w3.org/1999/xhtml" style="padding:${p}px;line-height:1">${el.outerHTML}</div></foreignObject></svg>`;
+    }
+    tmp.unmount();
+    wrap.remove();
+    const blob = new Blob([svgStr], {type:'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+  }, 150);
 };
 
 const Downloads = () => {
   const FileRow = ({ name, filename, format }) => (
     <button
-      onClick={() => downloadSVG(filename, SVGS[filename])}
+      onClick={() => { const [Comp, logoProps, isSVG] = LOGO_ASSETS[filename]; downloadLogo(filename, Comp, logoProps, isSVG); }}
       style={{display:'grid',gridTemplateColumns:'1fr auto',alignItems:'center',gap:16,padding:'14px 18px',background:C.paper,borderRadius:4,border:`1px solid ${C.rule}`,textDecoration:'none',color:C.ink,cursor:'pointer',width:'100%',textAlign:'left',transition:'background 0.15s'}}
       onMouseEnter={e=>e.currentTarget.style.background=C.paperWarm}
       onMouseLeave={e=>e.currentTarget.style.background=C.paper}
